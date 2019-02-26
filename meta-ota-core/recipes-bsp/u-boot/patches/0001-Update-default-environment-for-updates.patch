@@ -1,12 +1,12 @@
-From 703708eb8a9e425ba4fdf6508565157967c41925 Mon Sep 17 00:00:00 2001
+From f595f978467033718edcda6731c43c1602441cd4 Mon Sep 17 00:00:00 2001
 From: Mike Yagley <myagley@gmail.com>
 Date: Mon, 25 Feb 2019 11:37:32 -0800
 Subject: [PATCH] Update default environment for updates
 
 ---
- include/env_default.h | 2 ++
- include/env_ota.h     | 7 +++++++
- 2 files changed, 9 insertions(+)
+ include/env_default.h |  2 ++
+ include/env_ota.h     | 16 ++++++++++++++++
+ 2 files changed, 18 insertions(+)
  create mode 100644 include/env_ota.h
 
 diff --git a/include/env_default.h b/include/env_default.h
@@ -31,15 +31,24 @@ index b574345af2..9b1b12493f 100644
  #endif
 diff --git a/include/env_ota.h b/include/env_ota.h
 new file mode 100644
-index 0000000000..517b150cee
+index 0000000000..30c0c92f8a
 --- /dev/null
 +++ b/include/env_ota.h
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,16 @@
 +#ifndef __ENV_OTA_H__
 +#define __ENV_OTA_H__
 +
 +#define OTA_ENVIRONMENT \
-+	"hello=blah\0"
++	"ota_boot_interface=mmc\0" \
++	"ota_boot_device=0\0" \
++	"ota_boot_partition=2\0" \
++	"ota_init=" \
++	"setenv ota_kernel_root /dev/mmcblk${ota_boot_device}p${ota_boot_partition};" \
++	"setenv ota_boot ${ota_boot_interface} ${ota_boot_device}:${ota_boot_partition};" \
++	"setenv expand_bootargs \"setenv bootargs \\\"${bootargs}\\\"\";" \
++	"run expand_bootargs;" \
++	"setenv expand_bootargs;" \
++	"saveenv\0"
 +
 +#endif /* __ENV_OTA_H__ */
 -- 

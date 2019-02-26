@@ -1,0 +1,5 @@
+fdt addr ${fdt_addr} && fdt get value bootargs /chosen bootargs
+run ota_init
+mmc dev ${ota_boot_device}
+load ${ota_boot} ${kernel_addr_r} /boot/@@KERNEL_IMAGETYPE@@
+@@KERNEL_BOOTCMD@@ ${kernel_addr_r} - ${fdt_addr}
