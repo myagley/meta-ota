@@ -8,10 +8,10 @@ inherit cargo
 # how to get ota could be as easy as but default to a git checkout:
 # SRC_URI += "crate://crates.io/ota/0.1.0"
 SRC_URI += "git://git@github.com/myagley/ota.git;protocol=ssh"
-SRCREV = "a62292e1e815e181aa6ff2c129653188284fffc3"
+SRCREV = "f5ecd083b0e82e984cba79b708959ea49a92ffcc"
 S = "${WORKDIR}/git"
 CARGO_SRC_DIR="ota"
-PV_append = ".AUTOINC+a62292e1e8"
+PV_append = ".AUTOINC+f5ecd083b0"
 
 # please note if you have entries that do not begin with crate://
 # you must change them to how that package can be fetched
